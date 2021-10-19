@@ -1,0 +1,13 @@
+{
+ "empid":100,
+ "empname":"Charan",
+ "empaddress":{
+	 "HNO":"9999",
+      "HouseName":"ENCLAVE",
+	  "Street":"3rd line",
+	  "City":"hyd",
+      "PIN":"38"
+	  },
+ "empstatus":"A",
+ "empJoinDate":"2021-04-19 10:09:28"
+}

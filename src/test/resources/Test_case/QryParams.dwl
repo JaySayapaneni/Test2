@@ -1,0 +1,3 @@
+{   
+	uriParams: {empname: "Charan"}
+}

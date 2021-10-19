@@ -1,0 +1,11 @@
+{
+	"empno":213,
+	"ename":"Charan",
+	"job":"Clerk",
+	"mgr":7902,
+	"hiredate":"1980-12-17",
+	"sal":800.00,
+	"comm":300.00,
+	"deptno":20
+	
+}

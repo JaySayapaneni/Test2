@@ -1,0 +1,10 @@
+http:
+  host: "localhost"
+  port: "8086"
+  path: "read"
+
+db:
+  host: "localhost"
+  port: "1521"
+  username: "SYSTEM"
+  password: "![L6TOezXB9ufkoEJT4wPTJQ==]"

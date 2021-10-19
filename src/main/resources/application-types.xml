@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="Emp" format="json">
+      <types:shape format="weave" example="examples/Emp_date_form_conv-1.json"><![CDATA[%dw 2.0
+
+type Emp = {|
+  empname: String, 
+  empsal: Number {"typeId": "int"}, 
+  emploc: String, 
+  sex: String, 
+  hire: String, 
+  empstatus: String
+|} {"example": "{\\\"empname\\\":\\\"Charan\\\",\\\"empsal\\\":200000,\\\"emploc\\\":\\\"Hyd\\\",\\\"sex\\\":\\\"M\\\",\\\"hire\\\":\\\"2021-04-19\\\",\\\"empstatus\\\":\\\"A\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="Emp_PlukUsecase" format="json">
+      <types:shape format="weave" example="examples/Emp_PlukFunUseCase.json"><![CDATA[%dw 2.0
+
+type Emp_PlukUsecase = {|
+  empid: Number {"typeId": "int"}, 
+  empname: String, 
+  empaddress: {|
+    HNO: String, 
+    HouseName: String, 
+    Street: String, 
+    City: String, 
+    PIN: String
+  |}, 
+  empstatus: String, 
+  empJoinDate: String
+|} {"example": "{\\\"empid\\\":100,\\\"empname\\\":\\\"Charan\\\",\\\"empaddress\\\":{\\\"HNO\\\":\\\"9999\\\",\\\"HouseName\\\":\\\"ENCLAVE\\\",\\\"Street\\\":\\\"3rd line\\\",\\\"City\\\":\\\"hyd\\\",\\\"PIN\\\":\\\"38\\\"},\\\"empstatus\\\":\\\"A\\\",\\\"empJoinDate\\\":\\\"2021-04-19 10:09:28\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="Pluk_target" format="json">
+      <types:shape format="weave" example="examples/Emp_PlukFunUseCase-1.json"><![CDATA[%dw 2.0
+
+type Pluk_target = {|
+  empid: Number {"typeId": "int"}, 
+  empname: String, 
+  empaddress: {|
+    HNO: String, 
+    HouseName: String, 
+    Street: String, 
+    City: String, 
+    PIN: String
+  |}, 
+  empstatus: String, 
+  empJoinDate: String
+|} {"example": "{\\\"empid\\\":100,\\\"empname\\\":\\\"Charan\\\",\\\"empaddress\\\":{\\\"HNO\\\":\\\"9999\\\",\\\"HouseName\\\":\\\"ENCLAVE\\\",\\\"Street\\\":\\\"3rd line\\\",\\\"City\\\":\\\"hyd\\\",\\\"PIN\\\":\\\"38\\\"},\\\"empstatus\\\":\\\"A\\\",\\\"empJoinDate\\\":\\\"2021-04-19 10:09:28\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="Target_Meta" format="json">
+      <types:shape format="weave" example="examples/target.json"><![CDATA[%dw 2.0
+
+type Target_Meta = {|
+  empid: Number {"typeId": "int"}, 
+  empname: String, 
+  empaddress: String, 
+  empstatus: String, 
+  empJoinDate: String
+|} {"example": "{\\\"empid\\\":100,\\\"empname\\\":\\\"Charan\\\",\\\"empaddress\\\":\\\"bklkbldblkblkblvkblkblvkblvkblvkblkblkbvlbklvbkvlkbvl\\\",\\\"empstatus\\\":\\\"A\\\",\\\"empJoinDate\\\":\\\"2021-04-19 10:09:28\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="employee" format="json">
+      <types:shape format="weave" example="examples/emp.json"><![CDATA[%dw 2.0
+
+type employee = {|
+  empno: Number {"typeId": "int"}, 
+  ename: String, 
+  job: String, 
+  mgr: Number {"typeId": "int"}, 
+  hiredate: String, 
+  sal: Number {"typeId": "double"}, 
+  comm: Number {"typeId": "double"}, 
+  deptno: Number {"typeId": "int"}
+|} {"example": "{\\\"empno\\\":213,\\\"ename\\\":\\\"Charan\\\",\\\"job\\\":\\\"Clerk\\\",\\\"mgr\\\":7902,\\\"hiredate\\\":\\\"1980-12-17\\\",\\\"sal\\\":800.00,\\\"comm\\\":300.00,\\\"deptno\\\":20}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="emp_target_json" format="json">
+      <types:shape format="weave" example="examples/emp-1.json"><![CDATA[%dw 2.0
+
+type emp_target_json = {|
+  empno: Number {"typeId": "int"}, 
+  ename: String, 
+  job: String, 
+  mgr: Number {"typeId": "int"}, 
+  hiredate: String, 
+  sal: Number {"typeId": "double"}, 
+  comm: Number {"typeId": "double"}, 
+  deptno: Number {"typeId": "int"}
+|} {"example": "{\\\"empno\\\":213,\\\"ename\\\":\\\"Charan\\\",\\\"job\\\":\\\"Clerk\\\",\\\"mgr\\\":7902,\\\"hiredate\\\":\\\"1980-12-17\\\",\\\"sal\\\":800.00,\\\"comm\\\":300.00,\\\"deptno\\\":20}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#ddfc4146-c813-4e8f-b656-0ed5a8a2b0c5">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="Target_Meta"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#b53f86ea-bfd3-4ac3-a9ad-850c7b237280">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="Emp"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#32738db6-8814-42f9-a459-e20a59c1dc20">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="employee"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="emp_target_json"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
